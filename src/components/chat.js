@@ -1,12 +1,9 @@
-// import { useEffect } from 'react';
 import io from 'socket.io-client';
 import { useState, useEffect } from 'react';
 
 const socket = {
     current:io('https://chat-back-socket.onrender.com')
 }
-
-
 
 export const Chat = () => {
     const [onlineUsers, setOnlineUsers] = useState(0);
@@ -35,8 +32,6 @@ export const Chat = () => {
 
         socket.current.emit('addUser', { name: user });
         socket.current.on('messageList', (data)=>{setMessageList(data)})
-
-        
     }
 
     const handleSubmitMessage = (e) => {
@@ -45,7 +40,6 @@ export const Chat = () => {
         socket.current.on('alertMessage', (data) => {
             setMessageList([...messageList, data])
         });
-
     }
 
     return (<>
